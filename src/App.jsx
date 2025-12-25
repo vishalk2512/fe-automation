@@ -14,7 +14,7 @@ const App = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/receive/data')
+      const response = await fetch('http://localhost:3005/api/receive/data')
       if (response.ok) {
         const result = await response.json()
         setTableData(result)
@@ -27,7 +27,7 @@ const App = () => {
   const fetchStatus = useCallback(async () => {
     try {
       const response = await fetch(
-        'http://localhost:3000/api/automation/status'
+        'http://localhost:3005/api/automation/status'
       )
       if (response.ok) {
         const result = await response.json()
@@ -51,10 +51,10 @@ const App = () => {
   }, [fetchData, fetchStatus])
 
   return (
-    <div className='min-h-screen bg-neutral-800 p-6'>
-      <div className='flex items-center flex-wrap gap-4 mb-6'>
+    <div className="min-h-screen bg-neutral-800 p-6">
+      <div className="flex items-center flex-wrap gap-4 mb-6">
         <FileUpload setData={setUploadedData} hasData={tableData.length > 0} />
-        <div className='p-6 rounded-lg max-w-md space-y-4 bg-neutral-900'>
+        <div className="p-6 rounded-lg max-w-md space-y-4 bg-neutral-900">
           <RemoveData
             hasData={tableData.length > 0}
             isRunning={isRunning}
@@ -73,7 +73,7 @@ const App = () => {
           />
           <DownloadData data={tableData} />
         </div>
-        <div className='flex flex-col gap-4 ml-auto'>
+        <div className="flex flex-col gap-4 ml-auto">
           <StatusBadge isRunning={isRunning} />
           <AutomationControls
             isRunning={isRunning}

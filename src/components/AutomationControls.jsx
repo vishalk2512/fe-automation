@@ -18,7 +18,7 @@ const AutomationControls = ({ isRunning, hasData, onAutomationSuccess }) => {
     setLoading(true)
     setPendingAction(action)
     try {
-      await fetch(`http://localhost:3000/api/automation/${action}`, {
+      await fetch(`http://localhost:3005/api/automation/${action}`, {
         method: 'GET',
       })
 
@@ -31,17 +31,18 @@ const AutomationControls = ({ isRunning, hasData, onAutomationSuccess }) => {
   }
 
   return (
-    <div className='flex items-center gap-2 flex-wrap'>
+    <div className="flex items-center gap-2 flex-wrap">
       <button
         onClick={() => handleAction('start')}
         disabled={loading || isRunning || !hasData}
-        className='
+        className="
           px-4 py-2 rounded-md
           bg-green-600 text-white font-medium
           hover:bg-green-500 cursor-pointer
           disabled:opacity-50 disabled:pointer-events-none
           transition-colors
-        '>
+        "
+      >
         {loading && pendingAction === 'start'
           ? 'Starting...'
           : 'Start Automation'}
@@ -49,13 +50,14 @@ const AutomationControls = ({ isRunning, hasData, onAutomationSuccess }) => {
       <button
         onClick={() => handleAction('stop')}
         disabled={loading || !isRunning || !hasData}
-        className='
+        className="
           px-4 py-2 rounded-md
           bg-red-600 text-white font-medium
           hover:bg-red-500 cursor-pointer
           disabled:opacity-50 disabled:pointer-events-none
           transition-colors
-        '>
+        "
+      >
         {loading && pendingAction === 'stop'
           ? 'Stopping...'
           : 'Stop Automation'}

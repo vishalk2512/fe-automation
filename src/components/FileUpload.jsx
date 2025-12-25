@@ -74,10 +74,13 @@ const FileUpload = ({ setData, hasData }) => {
 
         const formattedData = jsonData.map((row, index) => ({
           id: index + 1,
-          name: safeTrim(row[REQUIRED_COLUMNS[0]]),
-          contact: safeTrim(row[REQUIRED_COLUMNS[1]]),
-          status: 'PENDING',
-          message: 'Not Processed',
+          name: safeTrim(row[REQUIRED_COLUMNS[0]]) || safeTrim(row['name']),
+          contact:
+            safeTrim(row[REQUIRED_COLUMNS[1]]) || safeTrim(row['contact']),
+          age: safeTrim(row['Age']) || safeTrim(row['age']),
+          gender: safeTrim(row['Sex']) || safeTrim(row['sex']),
+          status: safeTrim(row['status']) || 'PENDING',
+          message: safeTrim(row['message']) || 'Not Processed',
         }))
 
         setData(formattedData)
@@ -101,19 +104,20 @@ const FileUpload = ({ setData, hasData }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='p-6 rounded-lg max-w-md space-y-4 bg-neutral-900 min-h-[200px]'>
-      <label htmlFor='data' className='block text-sm text-neutral-300'>
+      className="p-6 rounded-lg max-w-md space-y-4 bg-neutral-900 min-h-[200px]"
+    >
+      <label htmlFor="data" className="block text-sm text-neutral-300">
         Upload Excel File
       </label>
 
       <input
         ref={fileInputRef}
-        type='file'
-        id='data'
-        accept='.xlsx,.xls'
+        type="file"
+        id="data"
+        accept=".xlsx,.xls"
         onChange={handleFileChange}
         disabled={loading || hasData}
-        className='
+        className="
           block w-full text-sm text-neutral-300
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
@@ -121,25 +125,26 @@ const FileUpload = ({ setData, hasData }) => {
           hover:file:bg-neutral-700
           cursor-pointer
           disabled:opacity-50 disabled:pointer-events-none
-        '
+        "
       />
 
       {error && (
-        <p className='text-sm text-red-400 bg-red-950/40 p-2 rounded-md'>
+        <p className="text-sm text-red-400 bg-red-950/40 p-2 rounded-md">
           {error}
         </p>
       )}
 
       <button
-        type='submit'
+        type="submit"
         disabled={loading || !file || hasData}
-        className='
+        className="
           w-full py-2 rounded-md
           bg-indigo-600 text-white
           hover:bg-indigo-500 cursor-pointer
           transition-colors
           disabled:opacity-50 disabled:pointer-events-none
-        '>
+        "
+      >
         {loading ? 'Processing...' : 'Submit'}
       </button>
     </form>

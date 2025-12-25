@@ -11,7 +11,7 @@ const RemoveData = ({ hasData, isRunning, onRemoveSuccess }) => {
     setError(null)
 
     try {
-      const response = await fetch('http://localhost:3000/api/clear/data', {
+      const response = await fetch('http://localhost:3005/api/clear/data', {
         method: 'DELETE',
       })
 
@@ -28,14 +28,15 @@ const RemoveData = ({ hasData, isRunning, onRemoveSuccess }) => {
   }
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className="flex flex-col gap-2">
       <button
         onClick={handleRemove}
-        className='bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-red-500 disabled:opacity-50 disabled:pointer-events-none'
-        disabled={loading || !hasData || isRunning}>
+        className="bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-red-500 disabled:opacity-50 disabled:pointer-events-none"
+        disabled={loading || !hasData || isRunning}
+      >
         {loading ? 'Deleting...' : 'Clear Data'}
       </button>
-      {error && <p className='text-sm text-red-500'>{error}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   )
 }
